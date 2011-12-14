@@ -33,7 +33,10 @@
 #include <string>
 #include <GLUT/GLUT.h>
 	
+
+
 class ofxTwBar {
+	
 	public:
 		ofxTwBar();
 		~ofxTwBar();
@@ -41,6 +44,7 @@ class ofxTwBar {
 		bool	mouseLocked;
 	
 		void	init( const std::string &title, const int w, const int h, const int r, const int g, const int b, const int a  );
+		void	init( const std::string &title, const std::string &barParams );
 		void	update();
 		void	resize(ofResizeEventArgs & args);
 		void	draw();
@@ -56,13 +60,15 @@ class ofxTwBar {
 		void	mouseReleased(ofMouseEventArgs & args);
 		
 		void	addParam( const std::string &name, bool *boolParam, const std::string &optionsStr = "", bool readOnly = false );
-		void	addParam( const std::string &name, float *quatParam, const std::string &optionsStr = "", bool readOnly = false, int type = TW_TYPE_FLOAT );
+		void	addParam( const std::string &name, float *floatParam, const std::string &optionsStr = "", bool readOnly = false, int type = TW_TYPE_FLOAT );
 		void	addParam( const std::string &name, int *intParam, const std::string &optionsStr = "", bool readOnly = false );
 		void	addParam( const std::string &name, ofVec3f *vectorParam, const std::string &optionsStr = "", bool readOnly = false );
 		void	addParam( const std::string &name, ofQuaternion *quatParam, const std::string &optionsStr = "", bool readOnly = false );
 		void	addParam( const std::string &name, std::string *strParam, const std::string &optionsStr = "", bool readOnly = false );
+        void    addParam( const std::string &name, ETwType type, TwSetVarCallback setCallback, TwGetVarCallback getCallback, void* object, const std::string &optionsStr = NULL );
 		void	addSeparator( const std::string &name = "", const std::string &optionsStr = "" );
-		void	addButton( const std::string &name = "", const std::string &optionsStr = "" );
+		void	addLabel( const std::string &name = "", const std::string &optionsStr = "" );
+        void    addButton( const std::string &name, TwButtonCallback callback, void *object, const std::string &optionsStr );
 		
 		void	removeParam(const std::string &name);
 		

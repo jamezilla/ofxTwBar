@@ -56,6 +56,25 @@ void ofxTwBar::init( const std::string &title, const int w, const int h, const i
 }
 
 //--------------------------------------------------------------
+void ofxTwBar::init( const std::string &title, const std::string &barParams )
+{
+	if(!TwInit(TW_OPENGL, NULL)) {
+		cout << "AntTweakBar initialization failed: " << TwGetLastError() << endl;
+	}
+	mBar = TwNewBar(title.c_str());//, TwDeleteBar);
+	
+	ostringstream oss;
+	
+	oss << title << " " << barParams;
+	
+	TwDefine( oss.str().c_str() );
+	
+	TwGLUTModifiersFunc(glutGetModifiers);
+	
+	mouseLocked = false;
+}
+
+//--------------------------------------------------------------
 void ofxTwBar::update(){
 }
 
@@ -114,6 +133,10 @@ void ofxTwBar::addParam( const std::string &name, float *param, const std::strin
 	implAddParam( name, param, type, optionsStr, readOnly );
 } 
 
+void ofxTwBar::addParam( const std::string &name, ETwType type, TwSetVarCallback setCallback, TwGetVarCallback getCallback, void* object, const std::string &optionsStr ) {
+    TwAddVarCB(mBar, name.c_str(), type, setCallback, getCallback, object, optionsStr.c_str());
+}
+
 //--------------------------------------------------------------
 void ofxTwBar::addParam( const std::string &name, int *param, const std::string &optionsStr, bool readOnly )
 {
@@ -146,8 +169,13 @@ void ofxTwBar::addSeparator( const std::string &name, const std::string &options
 }
 
 //--------------------------------------------------------------
-void ofxTwBar::addButton( const std::string &name, const std::string &optionsStr ) {
+void ofxTwBar::addLabel( const std::string &name, const std::string &optionsStr ) {
 	TwAddButton(mBar, name.c_str(), NULL, NULL, optionsStr.c_str());
+}
+
+//--------------------------------------------------------------
+void ofxTwBar::addButton( const std::string &name, TwButtonCallback callback, void *object, const std::string &optionsStr ) {
+	TwAddButton(mBar, name.c_str(), callback, object, optionsStr.c_str());
 }
 
 //--------------------------------------------------------------
