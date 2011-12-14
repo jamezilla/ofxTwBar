@@ -8,7 +8,6 @@ actual addButton() could be implemented.
 ## Additions ##
 * init() - overloaded method has more flexibility to take full [bar parameters syntax](http://www.antisphere.com/Wiki/tools:anttweakbar:twbarparamsyntax)
 * addParam() - overloaded to support using variables that can only be accessed using getter and setter callbacks
-Added 
 * addButton() - can take a callback and object to fire a method
 
 ## Attrbibutions ##
