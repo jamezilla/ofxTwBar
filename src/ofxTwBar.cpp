@@ -30,7 +30,13 @@ using namespace std;
 
 //--------------------------------------------------------------
 ofxTwBar::ofxTwBar() {
+	if(!TwInit(TW_OPENGL, NULL)) {
+		cout << "AntTweakBar initialization failed: " << TwGetLastError() << endl;
+	}
 
+	TwGLUTModifiersFunc(glutGetModifiers);
+	
+	mouseLocked = false;
 }
 
 //--------------------------------------------------------------
@@ -40,38 +46,26 @@ ofxTwBar::~ofxTwBar(){
 }
 
 //--------------------------------------------------------------
-void ofxTwBar::init( const std::string &title, const int w, const int h, const int r, const int g, const int b, const int a ) {
-	if(!TwInit(TW_OPENGL, NULL)) {
-		cout << "AntTweakBar initialization failed: " << TwGetLastError() << endl;
-	}
-	mBar = TwNewBar(title.c_str());//, TwDeleteBar);
+void ofxTwBar::addBar( const std::string &title, const int w, const int h, const int r, const int g, const int b, const int a )
+{
+	mBar = TwNewBar(title.c_str());
 	
-	char optionsStr[1024];
-	sprintf( optionsStr, "%s size='%i %i' color='%i %i %i' alpha=%i", title.c_str(), w, h, r, g, b, a);
-	TwDefine( optionsStr );
-	
-	TwGLUTModifiersFunc(glutGetModifiers);
-	
-	mouseLocked = false;
+	std::ostringstream oss;
+	oss << title;
+	oss << " size='"  << w << " " << h << "'";
+	oss << " color='" << r << " " << g << " " << b << "'";
+	oss << " alpha="  << a;
+	TwDefine( oss.str().c_str() );
 }
 
 //--------------------------------------------------------------
-void ofxTwBar::init( const std::string &title, const std::string &barParams )
+void ofxTwBar::addBar( const std::string &title, const std::string &barParams )
 {
-	if(!TwInit(TW_OPENGL, NULL)) {
-		cout << "AntTweakBar initialization failed: " << TwGetLastError() << endl;
-	}
-	mBar = TwNewBar(title.c_str());//, TwDeleteBar);
+	mBar = TwNewBar(title.c_str());
 	
-	ostringstream oss;
-	
+	std::ostringstream oss;
 	oss << title << " " << barParams;
-	
 	TwDefine( oss.str().c_str() );
-	
-	TwGLUTModifiersFunc(glutGetModifiers);
-	
-	mouseLocked = false;
 }
 
 //--------------------------------------------------------------
