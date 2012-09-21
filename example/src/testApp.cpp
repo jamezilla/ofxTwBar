@@ -51,8 +51,9 @@ void testApp::setup(){
     SetQuaternionFromAxisAngle(axis, angle, g_Rotation);
     SetQuaternionFromAxisAngle(axis, angle, g_RotateStart);
 	
-	//TWEAK BAR
-	bar.init("TweakBar", 200, 400, 200, 200, 200, 100);
+	// Create a floating tweakbar window, using the more restrictive parameterized form
+	// NOTE: the panel name must not contain spaces
+	bar.addBar("Tweak_Panel_1", 200, 400, 200, 200, 200, 100);
 	bar.enable();
 	
 	bar.addParam("Zoom", &g_Zoom, " min=0.01 max=500.0 step=1.0 keyIncr=z keyDecr=Z help='Scale the object (1=original size).' ", false);
@@ -62,6 +63,11 @@ void testApp::setup(){
 	bar.addSeparator("separator");
 	bar.addParam("Ambient", g_MatAmbient, " group='Material' ", false, TW_TYPE_COLOR3F);
 	bar.addParam("Diffuse", g_MatDiffuse, " group='Material' ", false, TW_TYPE_COLOR3F);
+	
+	// Create a second panel using the more flexible string-based approach
+	// Parameters described here: http://www.antisphere.com/Wiki/tools:anttweakbar:twbarparamsyntax
+	bar.addBar("Tweak_Panel_2", " size='240 320' position='700 20' valueswidth=75 color='255 100 100' alpha=50");
+	bar.addLabel("Label on panel 2");
 }
 
 //--------------------------------------------------------------

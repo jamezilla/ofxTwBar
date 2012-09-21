@@ -31,7 +31,7 @@
 #include "ofQuaternion.h"
 #include "AntTweakBar.h"
 #include <string>
-#include "glut.h"	
+#include <glut/glut.h>	
 
 
 class ofxTwBar {

@@ -5,6 +5,8 @@ which potentially breaks drop-in compatability. The main difference is
 that the addButton() method has been renamed to addLabel() so an
 actual addButton() could be implemented.
 
+Tested on MacOsx 10.6. Untested on Windows and Linux.
+
 ## Additions ##
 * init() - overloaded method has more flexibility to take full [bar parameters syntax](http://www.antisphere.com/Wiki/tools:anttweakbar:twbarparamsyntax)
 * addParam() - overloaded to support using variables that can only be accessed using getter and setter callbacks
@@ -12,4 +14,4 @@ actual addButton() could be implemented.
 
 ## Attrbibutions ##
 Originally based on code from Cinder Lib.
-Tested on MacOsx 10.6. Untested on Windows and Linux.
+
